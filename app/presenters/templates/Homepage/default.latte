@@ -1,0 +1,22 @@
+{block content}
+    <h1 n:block="title">Seznam knih</h1>
+
+    <table>
+        <tr>
+            <th>Název</th>
+            <th>Autor</th>
+            <th>Žánr</th>
+        </tr>
+    {foreach $posts as $post}
+        <tr>
+            <td>{$post->autor}</td>
+            <td>{$post->nazev_knihy}</td>
+            <td>{$post->nazev_zanru}</td>
+        </tr>
+    {/foreach}
+    </table>
+
+    <h2>Vložte novou knihu</h2>
+
+    {control commentForm}
+{/block}
