@@ -10,15 +10,29 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 {
 
     private $database;
+    private $sort;
 
     public function __construct(Nette\Database\Context $database)
     {
         $this->database = $database;
     }
 
+    public function handleSort($param)
+    {
+        $this->sort = $param;
+
+        if ($this->isAjax()) {
+            $this->redrawControl('tabulka');
+        }
+    }
+
     public function renderDefault()
     {
-        $this->template->posts = $this->database->query('SELECT * FROM knihy k JOIN zanry z ON k.zanr_id=z.zan_id ORDER BY nazev_zanru DESC');
+        if ($this->sort === null) {
+            $this->sort = 'id';
+        }
+        $this->template->sort = $this->sort;
+        $this->template->posts = $this->database->query('SELECT * FROM knihy k JOIN zanry z ON k.zanr_id=z.zan_id ORDER BY ' . $this->sort . ' DESC');
     }
 
     protected function createComponentCommentForm()

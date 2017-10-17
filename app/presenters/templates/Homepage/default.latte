@@ -1,20 +1,26 @@
 {block content}
     <h1 n:block="title">Seznam knih</h1>
 
+    {snippet tabulka}
     <table>
         <tr>
-            <th>Název</th>
-            <th>Autor</th>
-            <th>Žánr</th>
+            <th><a class="ajax" n:href="sort! nazev_knihy">Název</a></th>
+            <th><a class="ajax" n:href="sort! autor">Autor</a></th>
+            <th><a class="ajax" n:href="sort! zanr_id">Žánr</a></th>
         </tr>
+
     {foreach $posts as $post}
         <tr>
-            <td>{$post->autor}</td>
             <td>{$post->nazev_knihy}</td>
+            <td>{$post->autor}</td>
             <td>{$post->nazev_zanru}</td>
         </tr>
     {/foreach}
+
     </table>
+
+            {$sort}
+    {/snippet}
 
     <h2>Vložte novou knihu</h2>
 
