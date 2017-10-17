@@ -4,9 +4,9 @@
     {snippet tabulka}
     <table>
         <tr>
-            <th><a class="ajax" n:href="sort! nazev_knihy">Název</a></th>
-            <th><a class="ajax" n:href="sort! autor">Autor</a></th>
-            <th><a class="ajax" n:href="sort! zanr_id">Žánr</a></th>
+            <th>Název <a n:href="sort! nazev_knihy, true">↑</a> <a class="ajax" n:href="sort! nazev_knihy, false">↓</a></th>
+            <th>Autor <a n:href="sort! autor, true">↑</a> <a class="ajax" n:href="sort! autor, false">↓</a></th>
+            <th>Žánr <a n:href="sort! nazev_zanru, true">↑</a> <a class="ajax" n:href="sort! nazev_zanru, false">↓</a></th>
         </tr>
 
     {foreach $posts as $post}
@@ -18,8 +18,6 @@
     {/foreach}
 
     </table>
-
-            {$sort}
     {/snippet}
 
     <h2>Vložte novou knihu</h2>

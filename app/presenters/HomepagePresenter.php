@@ -11,15 +11,18 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
     private $database;
     private $sort;
+    private $smer;
 
     public function __construct(Nette\Database\Context $database)
     {
         $this->database = $database;
     }
 
-    public function handleSort($param)
+    public function handleSort($sloupec, $smer)
     {
-        $this->sort = $param;
+
+        $this->sort = $sloupec;
+        $this->smer = $smer;
 
         if ($this->isAjax()) {
             $this->redrawControl('tabulka');
@@ -30,9 +33,10 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
     {
         if ($this->sort === null) {
             $this->sort = 'id';
+            $this->smer = true;
         }
         $this->template->sort = $this->sort;
-        $this->template->posts = $this->database->query('SELECT * FROM knihy k JOIN zanry z ON k.zanr_id=z.zan_id ORDER BY ' . $this->sort . ' DESC');
+        $this->template->posts = $this->database->query('SELECT * FROM knihy k JOIN zanry z ON k.zanr_id=z.zan_id ORDER BY', [$this->sort => $this->smer]);
     }
 
     protected function createComponentCommentForm()
